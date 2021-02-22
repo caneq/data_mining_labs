@@ -1,3 +1,3 @@
-function c = chi2(approx, data, theta)
-c =  sum(((approx - data)./theta).^2);
+function c = chi2(approx, data, sigm)
+c =  sum(((approx - data)./sigm).^2);
 end
