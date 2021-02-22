@@ -5,7 +5,7 @@ fclose(fid);
 x = A(1, :);
 y = A(2, :);
 N = length(y);
-theta = A(3, :);
+sigm = A(3, :);
 
 %вычисление коэффициентов модели
 beta_model = [1,1];
@@ -22,9 +22,9 @@ veibull_y = my_veibull(veibull_model, x);
 chi2_y = my_chi2(chi2_model, x);
 
 %критерий согласия
-chi2_v_beta = chi2(beta_y, y, theta)./(N - length(beta_model) - 1);
-chi2_v_veibull = chi2(veibull_y, y, theta)./(N - length(veibull_model) - 1);
-chi2_v_chi2 = chi2(chi2_y, y, theta)./(N - length(chi2_model) - 1);
+chi2_v_beta = chi2(beta_y, y, sigm)./(N - length(beta_model) - 1);
+chi2_v_veibull = chi2(veibull_y, y, sigm)./(N - length(veibull_model) - 1);
+chi2_v_chi2 = chi2(chi2_y, y, sigm)./(N - length(chi2_model) - 1);
 
 
 disp(['chi2_v for beta    approx = ', num2str(chi2_v_beta)]);
@@ -32,9 +32,9 @@ disp(['chi2_v for veibull approx = ', num2str(chi2_v_veibull)]);
 disp(['chi2_v for chi2    approx = ', num2str(chi2_v_chi2)]);
 
 %взвешенные остатки
-r_beta = (y - beta_y)./theta;
-r_veibull = (y - veibull_y)./theta;
-r_chi2 = (y - chi2_y)./theta;
+r_beta = (y - beta_y)./sigm;
+r_veibull = (y - veibull_y)./sigm;
+r_chi2 = (y - chi2_y)./sigm;
 
 plot(x, r_beta, x, r_veibull, x, r_chi2);
 grid on;
