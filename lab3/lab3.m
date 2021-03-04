@@ -15,7 +15,7 @@ for i=1:1:K
     end
 end
 d = N*d;
-chi2 = chi2inv(0.999, (K*(K-1))/2);
+chi2 = chi2inv(0.99999, (K*(K-1))/2);
 
 if d > chi2
     disp('Корреляционная матрица значима, применение метода целесообразно');
@@ -46,11 +46,5 @@ figure
 scatter(Z(:,1),Z(:,2),'filled')
 xlabel('z1');
 ylabel('z2');
-
-figure
-scatter3(Z(:,1),Z(:,2),Z(:,3),'filled')
-xlabel('z1');
-ylabel('z2');
-zlabel('z3');
 
 Z2 = X_norm * pca(X_norm);
