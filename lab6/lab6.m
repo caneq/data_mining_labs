@@ -8,13 +8,16 @@ N = length(X);
 
 neuron_number = 4;
 
-% алгоритм сети Кохонена
-W = rand(neuron_number, 2);
-W_prev = rand(neuron_number, 2);
+minX = min(X);
+maxX = max(X);
 
-k_max = 1000;
+% алгоритм сети Кохонена
+W = rand(neuron_number, 2).*(maxX - minX) + minX;
+W_prev = zeros(neuron_number, 2);
+
+k_max = 1000000;
 k = 0;
-h = 0.7;
+h = 0.05;
 while (sum(abs(W - W_prev)) > 1e-6) & (k < k_max)
     k = k + 1;
     W_prev = W;
@@ -22,7 +25,7 @@ while (sum(abs(W - W_prev)) > 1e-6) & (k < k_max)
     rand_observation = X(randi(N), :);
     
     P = pdist2(rand_observation, W);
-    [value, index] = min(P);
+    [min_dist, index] = min(P);
     W(index,:) = W(index,:) + h*(rand_observation - W(index,:));
 
 end
