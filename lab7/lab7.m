@@ -8,10 +8,8 @@ fclose(fid);
 N = length(data);
 N_attrib = length(data(:,1));
 
-clust_number = 4;
-
 % создание карты
-net = newsom(data,[2 2]);
+net = newsom(data,[1 4]);
 
 %ф-ция классификации векторов входа по нейронной сети 
 net.trainParam.epochs = 1000; %набор параметров обучения
@@ -20,6 +18,9 @@ net = train(net, data);%обучение сети соответсвующим набором
 %Классифицировать исходные объекты в кластеры с использованием разработанной нейронной сети
 W = sim(net,data);
 clusters_distrib = vec2ind(W);%конвертирует классифицированные объекты в индексы нейронов
+
+clust_number = length(unique(clusters_distrib));
+
 
 clustered_data = cell(clust_number, 2); % 1 стролбец исходных признаков, 2 - pca
 
