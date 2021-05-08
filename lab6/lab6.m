@@ -8,8 +8,8 @@ N = length(X);
 
 neuron_number = 4;
 
-minX = min(X);
-maxX = max(X);
+minX = repmat(min(X), [neuron_number, 1]);
+maxX = repmat(max(X), [neuron_number, 1]);
 
 % алгоритм сети Кохонена
 W = rand(neuron_number, 2).*(maxX - minX) + minX;
